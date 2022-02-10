@@ -1,13 +1,14 @@
 
-OSNAME = BrickOS
+OSNAME = Brick-OS
 
 GNUEFI = ../gnu-efi
 OVMFDIR = ../OVMFbin
 LDS = BrickKernel.ld
-CC = x86_64-w64-mingw32-gcc
+CC = gcc
+LD = ld
 
 CFLAGS = -ffreestanding -fshort-wchar
-LDFLAGS = -T $(LDS) -shared -Bsymbolic -nostdlib
+LDFLAGS = -T $(LDS) -static -Bsymbolic -nostdlib
 
 SRCDIR := src
 OBJDIR := lib
@@ -20,17 +21,29 @@ SRC = $(call rwildcard,$(SRCDIR),*.c)
 OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
 DIRS = $(wildcard $(SRCDIR)/*)
 
+kernel: $(OBJS) link
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@ echo !==== COMPILING $^
+	@ mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $^ -o $@
+	
+link:
+	@ echo !==== LINKING
+	$(LD) $(LDFLAGS) -o $(BUILDDIR)/BrickKernel.elf $(OBJS)
+
 setup:
 	@mkdir $(BUILDDIR)
 	@mkdir $(OBJDIR)
 
 bootableimage:
-	dd if=/dev/zero of=$(BUILDDIR)/$(OSNAME).img bs=512 count=93750
+	dd if=/dev/zero of=$(BUILDDIR)/$(OSNAME).img bs=1512 count=193750
 	mformat -i $(BUILDDIR)/$(OSNAME).img -f 1440 ::
 	mmd -i $(BUILDDIR)/$(OSNAME).img ::/EFI
 	mmd -i $(BUILDDIR)/$(OSNAME).img ::/EFI/BOOT
 	mcopy -i $(BUILDDIR)/$(OSNAME).img $(BOOTEFI) ::/EFI/BOOT
 	mcopy -i $(BUILDDIR)/$(OSNAME).img startup.nsh ::
+	mcopy -i $(BUILDDIR)/$(OSNAME).img $(BUILDDIR)/BrickKernel.elf ::
 
 run:
 	qemu-system-x86_64 -drive file=$(BUILDDIR)/$(OSNAME).img -m 256M -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMFDIR)/OVMF_CODE-pure-efi.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMFDIR)/OVMF_VARS-pure-efi.fd" -net none
