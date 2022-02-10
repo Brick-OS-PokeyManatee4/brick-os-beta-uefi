@@ -41,7 +41,7 @@ void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour
 }
 
 Point CursorPosition;
-extern "C" void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char* str)
+void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char* str)
 {
     
     char* chr = str;
@@ -57,7 +57,7 @@ extern "C" void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned i
     }
 }
 
-extern "C" void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
+void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
     CursorPosition.X = 50;
     CursorPosition.Y = 120;
     for (int t = 0; t < 50; t+=1){

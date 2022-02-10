@@ -64,6 +64,8 @@ extern "C" void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
 
     Print(framebuffer,psf1_font, 0xffffffff, "Hello Kernel Hello Kernel");
     }
-    bool Modded = false;
+    bool Modded = true;
+    bool Debug = true;
+    bool Advanced = true;
     return ;
 }
