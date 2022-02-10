@@ -1,0 +1,14 @@
+echo Building Brick OS NOW!
+cd gnu-efi
+make
+make bootloader
+cd ../kernel
+make setup
+make kernel
+make bootableimage
+rm -r lib
+cd ../kerneldebug
+make setup
+make kernel
+make bootableimage
+rm -r lib
