@@ -28,7 +28,7 @@ typedef struct {
 void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char chr, unsigned int xOff, unsigned int yOff)
 {
     unsigned int* pixPtr = (unsigned int*)framebuffer->BaseAddress;
-    char* fontPtr = psf1_font->glyphBuffer + (chr * psf1_font->psf1_Header->charsize);
+    char* fontPtr = (char*)psf1_font->glyphBuffer + (chr * psf1_font->psf1_Header->charsize);
     for (unsigned long y = yOff; y < yOff + 16; y++){
         for (unsigned long x = xOff; x < xOff+8; x++){
             if ((*fontPtr & (0b10000000 >> (x - xOff))) > 0){
@@ -41,7 +41,7 @@ void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour
 }
 
 Point CursorPosition;
-void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char* str)
+void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, const char* str)
 {
     
     char* chr = str;
