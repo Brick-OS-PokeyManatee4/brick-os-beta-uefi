@@ -44,7 +44,7 @@ Point CursorPosition;
 void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, const char* str)
 {
     
-    char* (char*)chr = (char*)str;
+    char* chr = (char*)str;
     while(*chr != 0){
         putChar(framebuffer, psf1_font, colour, *chr, CursorPosition.X, CursorPosition.Y);
         CursorPosition.X+=8;
