@@ -60,12 +60,12 @@ extern "C" void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned i
 extern "C" void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
     CursorPosition.X = 50;
     CursorPosition.Y = 120;
-    for (int t = 0; t < 50; t+=1){
-
-    Print(framebuffer,psf1_font, 0xffffffff, "Hello Kernel Hello Kernel");
-    }
     bool Modded = true;
     bool Debug = true;
     bool Advanced = true;
+    for (int t = 0; t < 50; t+=1){
+
+    Print(framebuffer,psf1_font, 0xffffffff, "Loaded Brick OS Debug Kernel");
+    }
     return ;
 }
