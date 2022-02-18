@@ -15,7 +15,13 @@ jobs:
     - uses: actions/checkout@v2
       
     - name: Install dependencies
-      run: sudo apt install mtools docker
+      run: sudo apt install mtools
       
     - name: Build
       run: make
+      
+    - name: Download Output
+      uses: actions/upload-artifact@v2
+      with:
+          name: Brick OS Output
+          path: kernel/bin
