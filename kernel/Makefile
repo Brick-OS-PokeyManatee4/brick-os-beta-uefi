@@ -37,7 +37,7 @@ setup:
 	@mkdir $(OBJDIR)
 
 bootableimage:
-	dd if=/dev/zero of=$(BUILDDIR)/$(OSNAME).img bs=112 count=01
+	dd if=/dev/zero of=$(BUILDDIR)/$(OSNAME).img bs=112 count=1440
 	mformat -i $(BUILDDIR)/$(OSNAME).img -f 1440 ::
 	mmd -i $(BUILDDIR)/$(OSNAME).img ::/EFI
 	mmd -i $(BUILDDIR)/$(OSNAME).img ::/EFI/BOOT
