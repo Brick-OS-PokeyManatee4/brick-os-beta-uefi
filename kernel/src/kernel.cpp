@@ -62,7 +62,7 @@ extern "C" void _start(Framebuffer* framebuffer, PSF1_FONT* psf1_font){
     CursorPosition.Y = 120;
     for (int t = 0; t < 50; t+=1){
 
-    Print(framebuffer,psf1_font, 0xffffffff, "Hello Kernel Hello Kernel");
+    Print(framebuffer,psf1_font, 0xffffffff, "Loaded Brick OS Kernel");
     }
     bool Modded = false;
     return ;
