@@ -24,8 +24,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
           name: Brick OS Output
-          path: gnu-efi/x86_64
-          path2: kernel/bin
+          path: kernel/bin
           
 
 
