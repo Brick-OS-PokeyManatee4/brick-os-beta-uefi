@@ -1,4 +1,3 @@
-#include <stdbool.h>
 #include <stdint.h>
 #include "BasicRenderer.h"
 #include "cstr.h"
