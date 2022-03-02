@@ -2,12 +2,20 @@ echo Building Brick OS NOW!
 cd gnu-efi
 make
 make bootloader
+rm -r x86_64/lib
+rm -r x86_64/gnuefi
 cd ../kernel
 make setup
 make kernel
 make bootableimage
 rm -r lib
-cd ../kerneldebug
+cd ../debug
+cd gnu-efi
+make
+make bootloader
+rm -r x86_64/lib
+rm -r x86_64/gnuefi
+cd ../kernel
 make setup
 make kernel
 make bootableimage
