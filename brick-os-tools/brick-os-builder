@@ -1,22 +1,31 @@
 echo Building Brick OS NOW!
+mkdir bin
+mkdir bin/efi
+mkdir bin/efi/boot
+mkdir bin/kernel
 cd gnu-efi
 make
 make bootloader
 rm -r x86_64/lib
 rm -r x86_64/gnuefi
+mov ./x86_64/bootloader/main.efi ../bin/efi/boot/bootx64.efi
 cd ../kernel
 make setup
 make kernel
 make bootableimage
 rm -r lib
+mov ./bin/kernel/BrickKernel.elf
 cd ../debug
 cd gnu-efi
 make
 make bootloader
 rm -r x86_64/lib
 rm -r x86_64/gnuefi
+mov ./x86_64/bootloader/main.efi ../../bin/efi/boot/bootdebugx64.efi
 cd ../kernel
 make setup
 make kernel
 make bootableimage
 rm -r lib
+mov ./bin/kernel/BrickDebugKernel.elf
+echo DONE Building
