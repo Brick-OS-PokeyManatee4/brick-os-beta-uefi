@@ -14,7 +14,7 @@ make setup
 make kernel
 make bootableimage
 rm -r lib
-mv ./bin/kernel/BrickKernel.elf
+mv ./bin/BrickKernel.elf ../bin/kernel/BrickKernel.elf
 cd ../debug
 cd gnu-efi
 make
@@ -27,5 +27,5 @@ make setup
 make kernel
 make bootableimage
 rm -r lib
-mv ./bin/kernel/BrickDebugKernel.elf
+mv ./bin/BrickDebugKernel.elf ../../bin/kernel/BrickDebugKernel.elf
 echo DONE Building
