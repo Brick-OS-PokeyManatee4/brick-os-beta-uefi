@@ -120,8 +120,8 @@ int memcmp(const void* aptr, const void* bptr, size_t n){
 
 EFI_STATUS efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
 	InitializeLib(ImageHandle, SystemTable);
-    Print(L"Brick OS Debug Bootloader\n\r");
-    Print(L"© 2022 PokeyManatee4\n\r");
+        Print(L"Brick OS Debug Bootloader\n\r");
+        Print(L"© 2022 PokeyManatee4\n\r");
 	Print(L"Attempting to load Brick OS Kernel \n\r");
 
 	EFI_FILE* Kernel = LoadFile(NULL, L"BrickDebugKernel.elf", ImageHandle, SystemTable);
@@ -129,7 +129,9 @@ EFI_STATUS efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
 		Print(L"Could not load brick kernel \n\r");
 	}
 	else{
-		Print(L"Brick kernel Loaded Successfully \n\r");
+		Print(L"Brick OS Debug Kernel \n\r");
+                Print(L"© 2022 The Brick OS Team \n\r");
+                Print(L"Brick OS Debug Kernel Loaded \n\r");
 	}
 
 	Elf64_Ehdr header;
