@@ -236,7 +236,7 @@ EFI_STATUS efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
 
     void (*KernelStart)(Framebuffer*, PSF1_FONT*) = ((__attribute__((sysv_abi)) void (*)(Framebuffer*, PSF1_FONT*) ) header.e_entry);
     
-    BootInfo bootInfo;
+    BootInfo* bootInfo;
     bootInfo.framebuffer = newBuffer;
     bootInfo.psf1_Font = newFont;
 
