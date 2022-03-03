@@ -138,10 +138,9 @@ EFI_STATUS efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
 		Print(L"Could not load brick kernel \n\r");
 	}
 	else{
-		Print("Brick OS Normal Kernel \n\r");
-                Print("© 2022 The Brick OS Team \n\r");
-   		Print("Brick OS Normal Kernel Loaded \n\r");
-		Print(L"Brick kernel Loaded Successfully \n\r");
+		Print(L"Brick OS Normal Kernel \n\r");
+                Print(L"© 2022 The Brick OS Team \n\r");
+   		Print(L"Brick OS Normal Kernel Loaded \n\r");
 	}
 
 	Elf64_Ehdr header;
