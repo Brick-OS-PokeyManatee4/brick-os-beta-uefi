@@ -225,7 +225,7 @@ EFI_STATUS efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
     EFI_MEMORY_DESCRIPTOR* Map = NULL;
     UINTN MapSize, MapKey;
     UINTN DescriptorSize;
-    UINT32 DescriptorVersion;
+    UINTN32 DescriptorVersion;
     {
 
         SystemTable->BootServices->GetMemoryMap(&MapSize, Map, &MapKey, &DescriptorSize, &DescriptorVersion);
@@ -234,11 +234,14 @@ EFI_STATUS efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
 
     }
 
-    void (*KernelStart)(Framebuffer*, PSF1_FONT*) = ((__attribute__((sysv_abi)) void (*)(Framebuffer*, PSF1_FONT*) ) header.e_entry);
+    void (*KernelStart)(BootInfo*) = ((__attribute__((sysv_abi)) void (*)(BootInfo*) ) header.e_entry);
     
-    BootInfo* bootInfo;
+    BootInfo bootInfo;
     bootInfo.framebuffer = newBuffer;
     bootInfo.psf1_Font = newFont;
+    bootInfo.mMap = Map;
+    bootInfo.mMapSize = MapSize;
+    bootInfo.mMapDescSize = DescriptorSize;
 
     KernelStart(newBuffer, newFont);
 
