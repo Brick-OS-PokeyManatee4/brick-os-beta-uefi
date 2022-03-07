@@ -1,7 +1,6 @@
 
 OSNAME = Brick-OS
 
-GNUEFI = ../gnu-efi
 OVMFDIR = ../OVMFbin
 LDS = BrickKernel.ld
 CC = gcc
@@ -13,7 +12,7 @@ LDFLAGS = -T $(LDS) -static -Bsymbolic -nostdlib
 SRCDIR := src
 OBJDIR := lib
 BUILDDIR = bin
-BOOTEFI := $(GNUEFI)/x86_64/bootloader/main.efi
+BOOTEFI := ../bin/bootx64.efi
 
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
 
@@ -41,7 +40,7 @@ bootableimage:
 	mformat -i $(BUILDDIR)/$(OSNAME).img -f 1440 ::
 	mmd -i $(BUILDDIR)/$(OSNAME).img ::/EFI
 	mmd -i $(BUILDDIR)/$(OSNAME).img ::/EFI/BOOT
-	mcopy -i $(BUILDDIR)/$(OSNAME).img $(BOOTEFI) ::/EFI/BOOT
+	mcopy -i $(BUILDDIR)/$(OSNAME).img $(BOOTEFI) ::/EFI/BOOT/main.efi
 	mcopy -i $(BUILDDIR)/$(OSNAME).img startup.nsh ::
 	mcopy -i $(BUILDDIR)/$(OSNAME).img $(BUILDDIR)/BrickKernel.elf ::
 	mcopy -i $(BUILDDIR)/$(OSNAME).img zap-ext-light16.psf ::
