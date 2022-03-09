@@ -14,7 +14,23 @@ struct BootInfo {
 
 extern "C" void _start(BootInfo* bootInfo){
     
-    BasicRenderer newRenderer = BasicRenderer(bootInfo->framebuffer, bootInfo->psf1_Font); 
+    BasicRenderer newRenderer = BasicRenderer(bootInfo->framebuffer, bootInfo->psf1_Font);
+    
     newRenderer.Print("© 2022 The Brick OS Team");
+    
+    
+    uint64_t mMapEntries = bootInfo->mMapSize / bootInfo->mMapDescSize;
+    
+        for (int i = 0; i < mMapEntries; i++){
+        EFI_MEMORY_DESCRIPTOR* desc = (EFI_MEMORY_DESCRIPTOR*)((uint64_t)bootInfo->mMap + (i * bootInfo->mMapDescSize));
+        newRenderer.CursorPosition = {0, newRenderer.CursorPosition.Y + 16};
+        newRenderer.Print(EFI_MEMORY_TYPE_STRINGS[desc->type]);
+        newRenderer.Colour = 0xffff00ff;
+        newRenderer.Print(" ");
+        newRenderer.Print(to_string(desc->numPages * 4096 / 1024));
+        newRenderer.Print(" KB");
+        newRenderer.Colour = 0xffffffff;
+    }
+    
     return ;
 }
