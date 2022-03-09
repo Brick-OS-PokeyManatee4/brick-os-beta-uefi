@@ -5,7 +5,7 @@ BasicRenderer::BasicRenderer(Framebuffer* targetFramebuffer, PSF1_FONT* psf1_Fon
     TargetFramebuffer = targetFramebuffer;
     PSF1_Font = psf1_Font;
     Colour = 0x00ff00ff;
-    CursorPosition = {8, 8};
+    CursorPosition = {64, 8};
 }
 
 void BasicRenderer::Print(const char* str)
