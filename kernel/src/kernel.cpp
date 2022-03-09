@@ -13,7 +13,7 @@ struct BootInfo {
 
 extern "C" void _start(BootInfo* bootInfo){
     
-    BasicRenderer newRenderer = BasicRenderer(bootInfo->framebuffer, bootInfo->psf1_font); 
+    BasicRenderer newRenderer = BasicRenderer(bootInfo->framebuffer, bootInfo->psf1_Font); 
     newRenderer.Print("© 2022 The Brick OS Team");
     return ;
 }
