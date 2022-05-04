@@ -31,6 +31,7 @@ extern "C" void _start(BootInfo* bootInfo){
         newRenderer.Print(" KB");
         newRenderer.Colour = 0xffffffff;
     }
+    newRenderer.Print("Built On: ?");
     
     return ;
 }
