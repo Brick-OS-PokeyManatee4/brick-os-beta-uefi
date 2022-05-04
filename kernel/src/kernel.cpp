@@ -18,6 +18,8 @@ extern "C" void _start(BootInfo* bootInfo){
     
     newRenderer.Print("© 2022 The Brick OS Team");
     
+    newRenderer.Print("Built On: ?");
+    
     
     uint64_t mMapEntries = bootInfo->mMapSize / bootInfo->mMapDescSize;
     
@@ -31,7 +33,6 @@ extern "C" void _start(BootInfo* bootInfo){
         newRenderer.Print(" KB");
         newRenderer.Colour = 0xffffffff;
     }
-    newRenderer.Print("Built On: ?");
     
     return ;
 }
