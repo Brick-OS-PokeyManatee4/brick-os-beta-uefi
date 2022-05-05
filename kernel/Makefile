@@ -25,9 +25,9 @@ kernel: $(OBJS) link
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@ echo !==== COMPILING $^
 	@ mkdir -p $(@D)
-	sed -E "Built on:.*\$/Built on: `date`/" -i src/kernel.cpp
+	sed -E "newRenderer.Print("Built On: ?");.*\$/newRenderer.Print("Built On: `date`");/" -i src/kernel.cpp
 	$(CC) $(CFLAGS) -c $^ -o $@
-	
+
 link:
 	@ echo !==== LINKING
 	$(LD) $(LDFLAGS) -o $(BUILDDIR)/BrickKernel.elf $(OBJS)
