@@ -25,7 +25,7 @@ kernel: $(OBJS) link
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@ echo !==== COMPILING $^
 	@ mkdir -p $(@D)
-	sed -E "newRenderer.Print("Built On: ?");.*\$/newRenderer.Print("Built On: `date`");/" -i src/kernel.cpp
+	sed 's/newRenderer.Print("Built On: ?");/newRenderer.Print("Built On: `date`");/' src/kernel.cpp
 	$(CC) $(CFLAGS) -c $^ -o $@
 
 link:
