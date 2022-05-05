@@ -18,7 +18,7 @@ jobs:
       run: sudo apt install mtools
       
     - name: Build
-      run: make
+      run: make && cd kernel && cat src/kernel.cpp
       
     - name: Download Output
       uses: actions/upload-artifact@v2
